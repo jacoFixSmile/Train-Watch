@@ -36,7 +36,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class AddTrajectFragment extends android.app.Fragment {
 
     private TextView mTextView;
-    private RequestQueue queue;
     private Stations stations;
     private Context context;
     private Button buttonVertek;
@@ -69,9 +68,8 @@ public class AddTrajectFragment extends android.app.Fragment {
         Log.i("start oncreate view","gestart ingedrukt");
 
         view = inflater.inflate(R.layout.fragment_add_traject, container, false);
-        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         // verkrijg de stations + initalizeren station spinner
-        VolleyRequestStations();
+        stations= new Stations(context);
         buttonVertek= (Button) view.findViewById(R.id.buttonVertek);
         buttonVertek.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,15 +94,24 @@ public class AddTrajectFragment extends android.app.Fragment {
                 addTraject();
             }
         });
+        SharedPreferences sharedPreferences= context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.OnSharedPreferenceChangeListener myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener(){
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                LoadStationsPrefrences();
+            }
+        };
+        myPrefListner.onSharedPreferenceChanged(sharedPreferences,"Aankomst");
+        myPrefListner.onSharedPreferenceChanged(sharedPreferences,"Vertrek");
         return view;
     }
 
     private void OpenSelecteerStation(String plaats){
         Log.i("OpenSelecteerStation", "OpenSelecteerStation: klikt");
-        Intent intent = new Intent(context.getApplicationContext(),StationSelecter.class);
-        intent.putExtra("StationNaamen",stations.StationNaamen);
-        intent.putExtra("Plaats",plaats);
-        startActivity(intent);
+            Intent intent = new Intent(context.getApplicationContext(),StationSelecter.class);
+            intent.putExtra("StationNaamen",stations.StationNaamen);
+            Log.i("AddTrajectFragment", stations.StationNaamen.get(1));
+            intent.putExtra("Plaats",plaats);
+            startActivity(intent);
         LoadStationsPrefrences();
     }
     public void LoadStationsPrefrences(){
@@ -113,29 +120,7 @@ public class AddTrajectFragment extends android.app.Fragment {
         textView4.setText(sharedPreferences.getString("Aankomst","Geen Aankomst gevonden"));
     }
 
-    private void VolleyRequestStations(){
-        String url = "https://api.irail.be/stations/?format=json&lang=en";
-        final String[] returner = new String[1];
-        // Request a string response from the provided URL.
-        final StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.i("Data", "onResponse: "+response.substring(0,500));
-                        stations= new Stations(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context,"Stations niet gevonden",Toast.LENGTH_LONG);
-                Log.i("TAG", "Data niet gevonden: "+error.getMessage());
-            }
-        });
-        queue.add(stringRequest);
 
-// Add the request to the RequestQueue.
-    }
 
     private int GetHoeveelTrajecten(){
         SharedPreferences sharedPreferences= context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);

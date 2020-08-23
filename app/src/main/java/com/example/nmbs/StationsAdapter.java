@@ -71,7 +71,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
         SharedPreferences sharedPreferences=  Context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Set<String> strings = new HashSet<String>();
         strings.add(sharedPreferences.getString("Vertrek","Geen Vertrek gevonden"));
-        strings.add(sharedPreferences.getString("Aankomst","Geen Vertrek gevonden"));
+        strings.add(sharedPreferences.getString("Aankomst","Geen Aankomst gevonden"));
 
         if(!strings.contains(naam)){
             SharedPreferences.Editor editor = sharedPreferences.edit();
