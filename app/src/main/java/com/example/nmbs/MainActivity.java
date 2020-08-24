@@ -59,6 +59,7 @@ public class MainActivity extends WearableActivity {
         addTraject = new AddTrajectFragment();
         trajectenFragment= new TrajectenFragment();
         fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, trajectenFragment).commit();
         mWearableNavigationDrawer.addOnItemSelectedListener(new WearableNavigationDrawerView.OnItemSelectedListener() {
 
             @Override

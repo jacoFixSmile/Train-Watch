@@ -51,11 +51,13 @@ public class TrajectenFragment extends android.app.Fragment {
         SharedPreferences sharedPreferences= getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Map<String,?> keys = sharedPreferences.getAll();
         Log.i("TrajectFragment","Started");
-
+        String stations="";
         for(Map.Entry<String,?> entry : keys.entrySet()){
             Log.d("map values",entry.getKey() + ": " +entry.getValue().toString());
-        }
+            stations+=entry.getKey() + ": " +entry.getValue().toString();
 
+        }
+        text.setText(stations);
         return view;
     }
 }

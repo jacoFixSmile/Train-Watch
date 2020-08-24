@@ -109,7 +109,6 @@ public class AddTrajectFragment extends android.app.Fragment {
         Log.i("OpenSelecteerStation", "OpenSelecteerStation: klikt");
             Intent intent = new Intent(context.getApplicationContext(),StationSelecter.class);
             intent.putExtra("StationNaamen",stations.StationNaamen);
-            Log.i("AddTrajectFragment", stations.StationNaamen.get(1));
             intent.putExtra("Plaats",plaats);
             startActivity(intent);
         LoadStationsPrefrences();
@@ -125,10 +124,17 @@ public class AddTrajectFragment extends android.app.Fragment {
     private int GetHoeveelTrajecten(){
         SharedPreferences sharedPreferences= context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String waarde=sharedPreferences.getString("Aantal trajecten","Geen trajecten gevonden");
-        if(waarde!="Geen trajecten gevonden"){
+        Log.i("AddTrajectFragment", "GetHoeveelTrajecten: "+waarde);
+        if(!waarde.equals("Geen trajecten gevonden")){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Aantal trajecten",Integer.toString((Integer.parseInt(waarde))+1));
+            editor.commit();
             return Integer.parseInt(waarde);
         }else{
-            return 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Aantal trajecten","1");
+            editor.commit();
+            return 1;
         }
     }
 
@@ -136,7 +142,7 @@ public class AddTrajectFragment extends android.app.Fragment {
         if(textView3.getText()!="Geen Vertrek gevonden"&&textView4.getText()!="Geen Aankomst gevonden"){
             SharedPreferences sharedPreferences=  context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            int TrajectNummer=GetHoeveelTrajecten()+1;
+            int TrajectNummer=GetHoeveelTrajecten();
             Set<String> strings = new HashSet<String>();
             strings.add(textView3.getText().toString());
             strings.add(textView4.getText().toString());
