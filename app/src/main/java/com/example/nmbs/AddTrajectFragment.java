@@ -23,6 +23,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -139,15 +141,30 @@ public class AddTrajectFragment extends android.app.Fragment {
     }
 
     private void addTraject(){
+        Boolean uniek = true;
         if(textView3.getText()!="Geen Vertrek gevonden"&&textView4.getText()!="Geen Aankomst gevonden"){
+
             SharedPreferences sharedPreferences=  context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            Map<String,?> keys = sharedPreferences.getAll();
+            for(Map.Entry<String,?> entry : keys.entrySet()){
+                String traject =entry.getValue().toString();
+                Log.i("AddTrajectFragment", traject);
+                String vertrek=traject.substring(1);
+                Log.i("AddTrajectFragment","Vertrek:"+vertrek+" "+(traject.length()-1)+" "+traject.indexOf(','));
+                String aankomst=traject.substring(traject.indexOf(',')+2,traject.length()-1);
+                Log.i("AddTrajectFragment","Aankomst:"+aankomst );
+
+
+            }
             SharedPreferences.Editor editor = sharedPreferences.edit();
+
             int TrajectNummer=GetHoeveelTrajecten();
             Set<String> strings = new HashSet<String>();
             strings.add(textView3.getText().toString());
             strings.add(textView4.getText().toString());
             editor.putStringSet("Traject "+TrajectNummer,strings);
             editor.commit();
+
         }
 
     }
