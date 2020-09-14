@@ -29,6 +29,7 @@ import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -39,10 +40,11 @@ public class MainActivity extends WearableActivity {
 
 
     private WearableNavigationDrawerView mWearableNavigationDrawer;
-    private WearableActionDrawerView mWearableActionDrawer;
     private  FragmentManager fragmentManager;
     private AddTrajectFragment addTraject;
     private TrajectenFragment trajectenFragment;
+    private SettingFragment settingFragment;
+    private AddFragmentAutoFill addFragmentAutoFill;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +55,13 @@ public class MainActivity extends WearableActivity {
         // menu
 
         mWearableNavigationDrawer = findViewById(R.id.top_navigation_drawer);
-        mWearableActionDrawer = findViewById(R.id.bottom_action_drawer);
         mWearableNavigationDrawer.setAdapter(new NavigationAdapter(this));
         mWearableNavigationDrawer.getController().peekDrawer();
         addTraject = new AddTrajectFragment();
         trajectenFragment= new TrajectenFragment();
+        settingFragment = new SettingFragment();
         fragmentManager = getFragmentManager();
+        addFragmentAutoFill = new AddFragmentAutoFill();
         fragmentManager.beginTransaction().replace(R.id.content_frame, trajectenFragment).commit();
         mWearableNavigationDrawer.addOnItemSelectedListener(new WearableNavigationDrawerView.OnItemSelectedListener() {
 
@@ -66,8 +69,9 @@ public class MainActivity extends WearableActivity {
             public void onItemSelected(int i) {
                 // swich naar passende fragment
                 switch (i){
-                    case 1: fragmentManager.beginTransaction().replace(R.id.content_frame, addTraject).commit(); break;
-                    default:  fragmentManager.beginTransaction().replace(R.id.content_frame, trajectenFragment).commit(); break;
+                    case 0:  fragmentManager.beginTransaction().replace(R.id.content_frame, trajectenFragment).commit(); break;
+                    case 1: SetStationKiezerChecker(); break;
+                    case 2: fragmentManager.beginTransaction().replace(R.id.content_frame,settingFragment).commit();break;
                 }
             }
         });
@@ -78,6 +82,28 @@ public class MainActivity extends WearableActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+    private void SetStationKiezerChecker(){
+        SharedPreferences sharedPreferences= getBaseContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Map<String,?> keys = sharedPreferences.getAll();
+        Log.i("SettingFragment","Started");
+        ArrayList<Traject> stations= new ArrayList<>();
+        Boolean text=true;
+        for(Map.Entry<String,?> entry : keys.entrySet()){
+            Log.i("station text filter",entry.getKey() + ": " +entry.getValue().toString()+" "+(entry.getKey().equals("Station Kiezer"))+" "+(entry.getValue().toString()=="true"));
+            if(entry.getKey().equals("Station Kiezer")&&entry.getValue().toString()=="true"){
+                Log.i("station text filter",entry.getKey() + ": " +entry.getValue().toString());
+                text=false;
+            }
+        }
+
+        if(text){
+            Log.i("station text filter", "SetStationKiezerChecker: launch addtraject");
+            fragmentManager.beginTransaction().replace(R.id.content_frame, addTraject).commit();
+        }else{
+            Log.i("station text filter", "SetStationKiezerChecker: launch addfragmentautofill");
+            fragmentManager.beginTransaction().replace(R.id.content_frame, addFragmentAutoFill).commit();
+        }
     }
 
 

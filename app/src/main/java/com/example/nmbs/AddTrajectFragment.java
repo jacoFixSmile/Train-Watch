@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class AddTrajectFragment extends android.app.Fragment {
     private ImageButton imageButtonAdd;
     private View view;
     public static final String SHARED_PREFS = "shardPrefs";
+
 
     // TODO: Rename and change types and number of parameters
     public static AddTrajectFragment newInstance(String param1, String param2) {
@@ -90,6 +93,9 @@ public class AddTrajectFragment extends android.app.Fragment {
         textView3= (TextView) view.findViewById(R.id.textView3);
         textView4= (TextView) view.findViewById(R.id.textView4);
         imageButtonAdd=(ImageButton) view.findViewById(R.id.imageButtonAdd);
+        //
+
+
         imageButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

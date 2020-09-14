@@ -69,10 +69,11 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
     }
     private void setPrefVertrek(String naam){
         SharedPreferences sharedPreferences=  Context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        // TODO: 14-9-2020 fix dat je niet een traject 2*kan toevoegen
         Set<String> strings = new HashSet<String>();
         strings.add(sharedPreferences.getString("Vertrek","Geen Vertrek gevonden"));
         strings.add(sharedPreferences.getString("Aankomst","Geen Aankomst gevonden"));
-
+        
         if(!strings.contains(naam)){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(Plaats,naam);

@@ -5,25 +5,77 @@
     android:padding="10dp"
     android:elevation="10dp"
     android:orientation="vertical">
-
-
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/trackID"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textColor="@color/white"
+        android:background="@drawable/round_corner"
+        android:backgroundTint="@color/black"
+        android:layout_marginRight="5dp" />
     <TextView
         android:layout_gravity="center"
         android:id="@+id/vertrek"
         android:textSize="20px"
         android:text="Vertrek"
-        android:layout_width="match_parent"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@color/white" />
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/vertrekUur"
+            android:textSize="20px"
+            android:text="05:23"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spoor: 5"
+        android:paddingTop="-5dp"
+        android:id="@+id/vertrekSpoor"
+        android:paddingBottom="3dp"
+        android:paddingLeft="16dp"
+        android:textSize="18px"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:textColor="@color/white"
+            android:background="@drawable/round_corner"
+            android:layout_marginRight="5dp"/>
     <TextView
         android:layout_gravity="center"
         android:id="@+id/aankomst"
         android:text="Aankomst"
         android:textSize="20px"
-        android:layout_width="match_parent"
-        android:layout_height="60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@color/white" />
-
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/aankomstUur"
+            android:textSize="20px"
+            android:text="15:23"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 
 </LinearLayout>

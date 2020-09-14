@@ -26,7 +26,6 @@ public class StationSelecter extends WearableActivity {
         Intent intent = getIntent();
         stations= intent.getStringArrayListExtra("StationNaamen");
         Plaats=intent.getStringExtra("Plaats");
-        Log.i("Station", "1e station: "+stations.get(1));
         initiRecylerView();
         // zonder onderstaande code scorlt hij te snel maar het wel mooi gecentreerd
         CustomScrollingLayoutCallback customScrollingLayoutCallback =
@@ -36,6 +35,7 @@ public class StationSelecter extends WearableActivity {
 
 
     }
+
     private void initiRecylerView(){
         StationsAdapter adapter= new StationsAdapter(stations,getBaseContext(),Plaats,this);
         recycler_launcher_view.setAdapter(adapter);
