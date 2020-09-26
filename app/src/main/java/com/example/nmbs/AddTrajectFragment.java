@@ -37,7 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
  * create an instance of this fragment.
  *
  */
-public class AddTrajectFragment extends android.app.Fragment {
+public class AddTrajectFragment extends android.app.Fragment  {
 
     private TextView mTextView;
     private Stations stations;
@@ -169,6 +169,7 @@ public class AddTrajectFragment extends android.app.Fragment {
             strings.add(textView3.getText().toString());
             strings.add(textView4.getText().toString());
             editor.putStringSet("Traject "+TrajectNummer,strings);
+
             editor.commit();
 
         }

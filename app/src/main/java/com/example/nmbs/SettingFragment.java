@@ -23,13 +23,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.nmbs.AddTrajectFragment.SHARED_PREFS;
 
 public class SettingFragment  extends android.app.Fragment {
 
     private Switch StationSwich;
     private Button ResetApp;
     private View view;
-    public static final String SHARED_PREFS = "shardPrefs";
 
 
     public SettingFragment() {
@@ -83,16 +83,10 @@ public class SettingFragment  extends android.app.Fragment {
     }
     private void CheckSettings(){
         SharedPreferences sharedPreferences= getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        Map<String,?> keys = sharedPreferences.getAll();
         Log.i("SettingFragment","Started");
-        ArrayList<Traject> stations= new ArrayList<>();
-        for(Map.Entry<String,?> entry : keys.entrySet()){
-            if(entry.getKey()=="Station Kiezer"&&entry.getValue().toString()=="true"){
-                Log.d("station text filter",entry.getKey() + ": " +entry.getValue().toString());
-                StationSwich.setChecked(true);
-                }
-            }
-
+        if(sharedPreferences.getBoolean("Station Kiezer",true)){
+            StationSwich.setChecked(true);
+        }
         }
 }
 

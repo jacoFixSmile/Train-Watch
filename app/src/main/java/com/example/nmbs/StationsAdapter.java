@@ -28,13 +28,14 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
     private String Plaats;
     private Activity Closer;
 
-    public StationsAdapter(ArrayList<String> stations, Context context,String plaats, Activity closer ){
+    public StationsAdapter(ArrayList<String> stations, Context context,String plaats, Activity closer){
         Log.i("TAG", "init station adapter: ");
 
         Stations=stations;
         Context=context;
         Plaats=plaats;
         Closer= closer;
+
     }
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_station,parent,false);

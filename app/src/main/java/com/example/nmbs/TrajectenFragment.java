@@ -34,6 +34,7 @@ import java.security.Timestamp;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -59,6 +60,7 @@ public class TrajectenFragment extends android.app.Fragment {
     private Boolean done=false;
     private ArrayList <Traject> stations;
     private TrajectAdapter adapter;
+    private TextView lastRefresh;
     public TrajectenFragment() {
         // Required empty public constructor
     }
@@ -84,6 +86,7 @@ public class TrajectenFragment extends android.app.Fragment {
         recycler_launcher_view= view.findViewById(R.id.recycler_launcher_view_trajecten);
         recycler_launcher_view.setEdgeItemsCenteringEnabled(true);
         recycler_launcher_view.setLayoutManager(new WearableLinearLayoutManager(context));
+        lastRefresh=view.findViewById(R.id.lastRefresh);
         // zonder onderstaande code scorlt hij te snel maar het wel mooi gecentreerd
         CustomScrollingLayoutCallback customScrollingLayoutCallback =
                 new CustomScrollingLayoutCallback();
@@ -140,6 +143,7 @@ public class TrajectenFragment extends android.app.Fragment {
                             stations.get(teller).setAankomUur(String.format("%02d",aankomUur.getHours())+":"+String.format("%02d",aankomUur.getMinutes()));
                             stations.get(teller).setVertrekUur(String.format("%02d",vertrekUur.getHours())+":"+String.format("%02d",vertrekUur.getMinutes()));
                             stations.get(teller).setVertrekSpoort("Spoor: "+data.getJSONArray("connection").getJSONObject(0).getJSONObject("departure").get("platform").toString());
+                            lastRefresh.setText("Updated "+ Calendar.getInstance().getTime().getHours()+":"+Calendar.getInstance().getTime().getMinutes());
                         } catch (JSONException e) {
                             e.printStackTrace();
                             stations.get(teller).setVertrekSpoort("error"+e.getMessage());
