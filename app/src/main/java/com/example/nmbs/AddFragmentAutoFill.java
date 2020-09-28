@@ -79,6 +79,19 @@ public class AddFragmentAutoFill extends android.app.Fragment  {
                 return false;
             }
         });
+        autoFillAankomst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoadStationsPrefrences();
+
+            }
+        });
+        autoFillTextVertek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoadStationsPrefrences();
+            }
+        });
         autoFillAankomst.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

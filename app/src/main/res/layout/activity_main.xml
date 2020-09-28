@@ -5,7 +5,7 @@
     android:id="@+id/addButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dark_grey"
+    android:background="#000000"
     android:hapticFeedbackEnabled="false"
     android:padding="@dimen/box_inset_layout_padding"
     tools:deviceIds="wear">

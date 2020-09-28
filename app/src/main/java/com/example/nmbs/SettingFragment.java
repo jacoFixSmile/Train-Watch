@@ -64,6 +64,8 @@ public class SettingFragment  extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: 14-9-2020 verwijder alle shared prefferences
+                SharedPreferences sharedPreferences= getContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
                 System.exit(0);
             }
         });

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SettingFragment"
+    android:background="#000000"
     android:paddingTop="15dp">
         <TextView
             android:id="@+id/tester"
@@ -26,4 +27,15 @@
         android:background="@drawable/round_corner"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Help/info Creator:"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="daanfostier@gmail.com"/>
 </LinearLayout>

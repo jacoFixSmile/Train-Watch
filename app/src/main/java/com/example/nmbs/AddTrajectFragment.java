@@ -80,6 +80,7 @@ public class AddTrajectFragment extends android.app.Fragment  {
             @Override
             public void onClick(View view) {
                 OpenSelecteerStation("Vertrek");
+                LoadStationsPrefrences();
                 Log.i("Vertrek knop ingedrukt","This ingedrukt");
             }
         });
@@ -87,6 +88,7 @@ public class AddTrajectFragment extends android.app.Fragment  {
         buttonAankomst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LoadStationsPrefrences();
                 OpenSelecteerStation("Aankomst");
             }
         });
